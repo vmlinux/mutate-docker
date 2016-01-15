@@ -1,5 +1,5 @@
 #!/bin/bash
-APPDIR=/home/$USER/.config/Mutate/scripts/docker
+APPDIR=/home/job/.config/Mutate/scripts/docker
 function get_images {
 	if [ "$2" != "" ] ; then
 		list=$(docker images | awk 'NR>1{print $0}' | grep "$2")
@@ -19,7 +19,7 @@ function get_images {
 			created=$(echo $created | sed 's/\*/ /g')
 			imagesize=$(echo $imagesize | sed 's/\*/ /g')
 			echo "[$reponame:$repotag]"
-			echo "command=gnome-terminal -e \"docker run -it --rm $reponame:$repotag bash\" &"
+			echo "command=gnome-terminal -e \"$APPDIR/run.sh $reponame $repotag\" &"
 			echo "icon=$APPDIR/docker.png"
 			echo "subtext=镜像ID:$imageid 大小:$imagesize 时间:$created"
 		fi
